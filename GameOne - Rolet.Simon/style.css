@@ -5,57 +5,118 @@ body {
   height: 100vh;
   margin: 0;
   font-family: Arial, sans-serif;
+  background-color: #0B3D91;
 }
 
 .roulette-container {
+  position: relative;
   text-align: center;
 }
 
-.roulette {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  border: 5px solid #333;
-  overflow: hidden;
+.pointer {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 30px solid gold; /* Стрелката сочи надолу */
+  position: absolute;
+  top: 35px; /* Позициониране точно под рулетката */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
 }
 
 .wheel {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
   background: conic-gradient(
-    #FFEB3B 0deg 10deg, #4CAF50 10deg 20deg, #FF5722 20deg 30deg, #2196F3 30deg 40deg, 
-    #FFC107 40deg 50deg, #9C27B0 50deg 60deg, #FFEB3B 60deg 70deg, #4CAF50 70deg 80deg,
-    #FF5722 80deg 90deg, #2196F3 90deg 100deg, #FFC107 100deg 110deg, #9C27B0 110deg 120deg, 
-    #FFEB3B 120deg 130deg, #4CAF50 130deg 140deg, #FF5722 140deg 150deg, #2196F3 150deg 160deg, 
-    #FFC107 160deg 170deg, #9C27B0 170deg 180deg, #FFEB3B 180deg 190deg, #4CAF50 190deg 200deg,
-    #FF5722 200deg 210deg, #2196F3 210deg 220deg, #FFC107 220deg 230deg, #9C27B0 230deg 240deg,
-    #FFEB3B 240deg 250deg, #4CAF50 250deg 260deg, #FF5722 260deg 270deg, #2196F3 270deg 280deg,
-    #FFC107 280deg 290deg, #9C27B0 290deg 300deg, #FFEB3B 300deg 310deg, #4CAF50 310deg 320deg, 
-    #FF5722 320deg 330deg, #2196F3 330deg 340deg, #FFC107 340deg 350deg, #9C27B0 350deg 360deg);
+    #FF0000 0deg 10deg,
+    #000000 10deg 20deg,
+    #FF0000 20deg 30deg,
+    #000000 30deg 40deg,
+    #FF0000 40deg 50deg,
+    #000000 50deg 60deg,
+    #FF0000 60deg 70deg,
+    #000000 70deg 80deg,
+    #FF0000 80deg 90deg,
+    #000000 90deg 100deg,
+    #FF0000 100deg 110deg,
+    #000000 110deg 120deg,
+    #FF0000 120deg 130deg,
+    #000000 130deg 140deg,
+    #FF0000 140deg 150deg,
+    #000000 150deg 160deg,
+    #FF0000 160deg 170deg,
+    #000000 170deg 180deg,
+    #FF0000 180deg 190deg,
+    #000000 190deg 200deg,
+    #FF0000 200deg 210deg,
+    #000000 210deg 220deg,
+    #FF0000 220deg 230deg,
+    #000000 230deg 240deg,
+    #FF0000 240deg 250deg,
+    #000000 250deg 260deg,
+    #FF0000 260deg 270deg,
+    #000000 270deg 280deg,
+    #FF0000 280deg 290deg,
+    #000000 290deg 300deg,
+    #FF0000 300deg 310deg,
+    #000000 310deg 320deg,
+    #FF0000 320deg 330deg,
+    #000000 330deg 340deg,
+    #FF0000 340deg 350deg,
+    #00FF00 350deg 360deg /* Зелено за 0 */
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  position: relative;
   transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
-#center-display {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 36px;
-  font-weight: bold;
-  color: #333;
+.betting-table {
+  margin-top: 20px;
+  font-size: 18px;
+  color: white;
 }
 
-#spin-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
+.betting-type-selector {
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: white;
 }
 
 #result {
   margin-top: 10px;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
+  color: gold;
 }
+
+.number-bet, .color-bet {
+  margin-top: 10px;
+}
+
+.number {
+  position: absolute;
+  color: gold; /* Златен цвят */
+  font-size: 16px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Лек сянка за по-добра видимост */
+  user-select: none;
+}
+
+/* Стилизиране на числата върху колелото */
+.number {
+  position: absolute;
+  color: gold; /* Златен цвят за числата */
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  transform-origin: center;
+  user-select: none;
+  pointer-events: none; /* За да не пречат на взаимодействията с рулетката */
+}
+

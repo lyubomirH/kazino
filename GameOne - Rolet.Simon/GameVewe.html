@@ -3,15 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Рулетка с числа</title>
+  <title>Рулетка</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="roulette-container">
-    <div class="roulette">
-      <div class="wheel">
-        <div id="center-display"></div>
+    <!-- Меню за избор на тип залагане -->
+    <div class="betting-type-selector">
+      <label for="betting-type">Изберете тип залагане: </label>
+      <select id="betting-type">
+        <option value="number">Число</option>
+        <option value="color">Цвят</option>
+      </select>
+    </div>
+
+    <!-- Стрелка -->
+    <div class="pointer"></div>
+
+    <!-- Рулетка -->
+    <div class="wheel" id="wheel"></div>
+    
+    <!-- Поле за залагане -->
+    <div class="betting-table" id="betting-table">
+      <!-- За числа -->
+      <div class="number-bet">
+        <label for="bet-number">Избери число (0-36): </label>
+        <input type="number" id="bet-number" min="0" max="36" value="0">
       </div>
+
+      <!-- За цветове -->
+      <div class="color-bet" style="display:none;">
+        <label for="bet-color">Избери цвят: </label>
+        <select id="bet-color">
+          <option value="red">Червено</option>
+          <option value="black">Черно</option>
+          <option value="green">Зелено</option>
+        </select>
+      </div>
+
       <button id="spin-button">Завърти</button>
       <div id="result"></div>
     </div>
