@@ -1,0 +1,43 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .roulette-container {
+    text-align: center;
+  }
+  
+  .roulette {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 5px solid #333;
+    overflow: hidden;
+  }
+  
+  .wheel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: conic-gradient(#FFEB3B 0deg 60deg, #4CAF50 60deg 120deg, #FF5722 120deg 180deg, #2196F3 180deg 240deg, #FFC107 240deg 300deg, #9C27B0 300deg 360deg);
+    transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  
+  #spin-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  #result {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
