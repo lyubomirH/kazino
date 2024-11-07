@@ -1,43 +1,61 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  .roulette-container {
-    text-align: center;
-  }
-  
-  .roulette {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    border: 5px solid #333;
-    overflow: hidden;
-  }
-  
-  .wheel {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: conic-gradient(#FFEB3B 0deg 60deg, #4CAF50 60deg 120deg, #FF5722 120deg 180deg, #2196F3 180deg 240deg, #FFC107 240deg 300deg, #9C27B0 300deg 360deg);
-    transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
-  }
-  
-  #spin-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  #result {
-    margin-top: 10px;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.roulette-container {
+  text-align: center;
+}
+
+.roulette {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 5px solid #333;
+  overflow: hidden;
+}
+
+.wheel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: conic-gradient(
+    #FFEB3B 0deg 10deg, #4CAF50 10deg 20deg, #FF5722 20deg 30deg, #2196F3 30deg 40deg, 
+    #FFC107 40deg 50deg, #9C27B0 50deg 60deg, #FFEB3B 60deg 70deg, #4CAF50 70deg 80deg,
+    #FF5722 80deg 90deg, #2196F3 90deg 100deg, #FFC107 100deg 110deg, #9C27B0 110deg 120deg, 
+    #FFEB3B 120deg 130deg, #4CAF50 130deg 140deg, #FF5722 140deg 150deg, #2196F3 150deg 160deg, 
+    #FFC107 160deg 170deg, #9C27B0 170deg 180deg, #FFEB3B 180deg 190deg, #4CAF50 190deg 200deg,
+    #FF5722 200deg 210deg, #2196F3 210deg 220deg, #FFC107 220deg 230deg, #9C27B0 230deg 240deg,
+    #FFEB3B 240deg 250deg, #4CAF50 250deg 260deg, #FF5722 260deg 270deg, #2196F3 270deg 280deg,
+    #FFC107 280deg 290deg, #9C27B0 290deg 300deg, #FFEB3B 300deg 310deg, #4CAF50 310deg 320deg, 
+    #FF5722 320deg 330deg, #2196F3 330deg 340deg, #FFC107 340deg 350deg, #9C27B0 350deg 360deg);
+  transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+#center-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+}
+
+#spin-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#result {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}

@@ -1,28 +1,44 @@
 const wheel = document.querySelector('.wheel');
 const spinButton = document.getElementById('spin-button');
 const resultDisplay = document.getElementById('result');
+const centerDisplay = document.getElementById('center-display');
 
-// Секции в рулетката
-const sections = ["Награда 1", "Награда 2", "Награда 3", "Награда 4", "Награда 5", "Награда 6"];
+
+const numbers = Array.from({ length: 36 }, (_, i) => i + 1);
 
 let isSpinning = false;
 
-spinButton.addEventListener('click', () => {
-  if (isSpinning) return;  // Избягване на повторно натискане по време на въртене
+
+function spinWheel() {
+  if (isSpinning) return;
 
   isSpinning = true;
   resultDisplay.textContent = "";
+  centerDisplay.textContent = "";
 
-  // Генериране на случайно завъртане
-  const randomAngle = Math.floor(Math.random() * 360) + 360 * 5; // Минимум 5 пълни оборота
+  
+  const randomAngle = Math.floor(Math.random() * 360) + 360 * 5;
   wheel.style.transform = `rotate(${randomAngle}deg)`;
 
-  // Изчисляване на резултата
+  
   setTimeout(() => {
     const winningAngle = randomAngle % 360;
-    const sectionIndex = Math.floor(winningAngle / (360 / sections.length));
-    const result = sections[sections.length - 1 - sectionIndex];
+    const sectionIndex = Math.floor(winningAngle / (360 / numbers.length));
+    const result = numbers[numbers.length - 1 - sectionIndex];
+
+    
     resultDisplay.textContent = `Резултат: ${result}`;
+    centerDisplay.textContent = result;
     isSpinning = false;
-  }, 4000); // Съответства на времето за въртене (4 секунди)
+  }, 4000);
+}
+
+
+spinButton.addEventListener('click', spinWheel);
+
+
+document.addEventListener('keydown', (event) => {
+  if (event.code === 'Space') {
+    spinWheel();
+  }
 });
