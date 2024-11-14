@@ -83,6 +83,16 @@ function addNumbersToWheel() {
 
 window.addEventListener('load', addNumbersToWheel);
 
+bettingTypeSelect.addEventListener('change', () => {
+  if (bettingTypeSelect.value === 'color') {
+    colorBetDiv.style.display = 'block';
+    numberBetDiv.style.display = 'none';
+  } else {
+    colorBetDiv.style.display = 'none';
+    numberBetDiv.style.display = 'block';
+  }
+});
+
 spinButton.addEventListener('click', spinWheel);
 
 function spinWheel() {
