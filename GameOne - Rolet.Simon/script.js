@@ -8,9 +8,8 @@ const betNumberInput = document.getElementById('bet-number');
 const betColorInput = document.getElementById('bet-color');
 
 let isSpinning = false;
-let currentRotation = 0; // Променлива, която съхранява текущото завъртане
+let currentRotation = 0;
 
-// Списък на цветовете на рулетката
 const colors = [
   { color: 'black', degreeRange: [0, 10] },
   { color: 'red', degreeRange: [10, 20] },
@@ -50,7 +49,6 @@ const colors = [
   { color: 'green', degreeRange: [350, 360] }
 ];
 
-// Обработчик за промяна на типа на залагане
 bettingTypeSelect.addEventListener('change', () => {
   const betType = bettingTypeSelect.value;
   if (betType === 'number') {
@@ -79,27 +77,22 @@ function spinWheel() {
   }
 
   isSpinning = true;
-  resultDisplay.textContent = ""; // Изчистване на предишния резултат
+  resultDisplay.textContent = "";
 
-  // Генериране на случаен резултат и добавяне на фиксиран брой завъртания
   const randomOffset = Math.floor(Math.random() * 360);
-  const baseAngle = 360 * 5; // 5 пълни оборота
+  const baseAngle = 360 * 5;
   const finalAngle = baseAngle + randomOffset;
 
-  // Актуализиране на текущото завъртане
   currentRotation += finalAngle;
 
-  // Завъртане на рулетката
   wheel.style.transition = 'transform 4s cubic-bezier(0.33, 1, 0.68, 1)';
   wheel.style.transform = `rotate(${currentRotation}deg)`;
 
-  // Изчисляване на резултата след 4 секунди (когато анимацията спре)
   setTimeout(() => {
     const winningAngle = currentRotation % 360;
     const sectionIndex = Math.floor(winningAngle / (360 / (betType === 'number' ? 37 : colors.length)));
     const result = betType === 'number' ? sectionIndex : colors[sectionIndex].color;
 
-    // Проверка на залагането
     if (result === bet) {
       resultDisplay.textContent = `Поздравления! Спечелихте със ${betType === 'number' ? 'число' : 'цвят'} ${result}`;
     } else {
@@ -110,33 +103,42 @@ function spinWheel() {
   }, 4000);
 }
 
-// Стартиране на завъртането при натискане на бутона
 spinButton.addEventListener('click', spinWheel);
 
 const numbers = [
-  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-  19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36
+36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 24, 23, 22, 21,
+20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
 ];
 
-// Функция за добавяне на числата върху колелото
 function addNumbersToWheel() {
+  const totalNumbers = numbers.length;
+  const offsetAngle =(360 / totalNumbers); // Ъгъл между всяко число
+  const rotationOffset = offsetAngle / 2; // Завъртане, за да позиционираме 0 между 0 и 36
+
   numbers.forEach((number, index) => {
     const numberElement = document.createElement('div');
     numberElement.classList.add('number');
     numberElement.setAttribute('data-number', number);
     numberElement.textContent = number;
 
-    // Изчисляваме позицията на всяко число
-    const angle = (360 / 37) * index;
-    const x = 55 + Math.sin((angle * Math.PI) / 180) * 40; // 120 е радиусът
-    const y = 40 - Math.cos((angle * Math.PI) / 180) * 40; // 120 е радиусът
+    // Завъртаме всеки елемент с допълнителен офсет, за да преместим 0
+    const angle = index * offsetAngle + rotationOffset;
 
-    numberElement.style.left = `${x}%`;
-    numberElement.style.top = `${y}%`;
+    // Изчисляваме позицията на числото върху кръга
+    const x = 146 + Math.cos((angle - 90) * (Math.PI / 180)) * 136;
+    const y = 150 + Math.sin((angle - 90) * (Math.PI / 180)) * 136;
+
+    numberElement.style.position = 'absolute';
+    numberElement.style.left = `${x}px`;
+    numberElement.style.top = `${y}px`;
+    numberElement.style.transform = `rotate(${angle}deg)`;
 
     wheel.appendChild(numberElement);
   });
 }
 
-// Извикваме функцията при зареждане на страницата
+
 window.addEventListener('load', addNumbersToWheel);
+//    const angle = (360 / 38) * index;
+//const x = 50 + Math.sin((angle * Math.PI) / 180) * 46;
+//const y = 46 - Math.cos((angle * Math.PI) / 180) * 46; 145

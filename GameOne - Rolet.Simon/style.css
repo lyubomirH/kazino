@@ -18,9 +18,9 @@ body {
   height: 0;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
-  border-top: 30px solid gold; /* Стрелката сочи надолу */
+  border-top: 30px solid gold;
   position: absolute;
-  top: 35px; /* Позициониране точно под рулетката */
+  top: 35px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
@@ -66,7 +66,7 @@ body {
     #FF0000 320deg 330deg,
     #000000 330deg 340deg,
     #FF0000 340deg 350deg,
-    #00FF00 350deg 360deg /* Зелено за 0 */
+    #00FF00 350deg 360deg 
   );
   display: flex;
   align-items: center;
@@ -101,22 +101,23 @@ body {
 
 .number {
   position: absolute;
-  color: gold; /* Златен цвят */
-  font-size: 16px;
-  font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Лек сянка за по-добра видимост */
-  user-select: none;
-}
-
-/* Стилизиране на числата върху колелото */
-.number {
-  position: absolute;
-  color: gold; /* Златен цвят за числата */
+  color: gold;
   font-size: 16px;
   font-weight: bold;
   text-align: center;
   transform-origin: center;
   user-select: none;
-  pointer-events: none; /* За да не пречат на взаимодействията с рулетката */
+  pointer-events: none;
+}
+
+.number {
+  position: absolute;
+  color: gold;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  transform-origin: center;
+  user-select: none;
+  pointer-events: none;
 }
 
