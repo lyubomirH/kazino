@@ -49,16 +49,41 @@ const colors = [
   { color: 'green', degreeRange: [350, 360] }
 ];
 
-bettingTypeSelect.addEventListener('change', () => {
-  const betType = bettingTypeSelect.value;
-  if (betType === 'number') {
-    numberBetDiv.style.display = 'block';
-    colorBetDiv.style.display = 'none';
-  } else {
-    numberBetDiv.style.display = 'none';
-    colorBetDiv.style.display = 'block';
-  }
-});
+const numbers = [
+  36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20,
+  19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+];
+
+function addNumbersToWheel() {
+  const totalNumbers = numbers.length;
+  const offsetAngle = 360 / totalNumbers; // Ъгъл между всяко число
+  const rotationOffset = offsetAngle / 2; // Завъртане, за да позиционираме 0 между 0 и 36
+
+  numbers.forEach((number, index) => {
+    const numberElement = document.createElement('div');
+    numberElement.classList.add('number');
+    numberElement.setAttribute('data-number', number);
+    numberElement.textContent = number;
+
+    // Завъртаме всеки елемент с допълнителен офсет, за да преместим 0
+    const angle = index * offsetAngle + rotationOffset;
+
+    // Изчисляваме позицията на числото върху кръга
+    const x = 143 + Math.cos((angle - 90) * (Math.PI / 180)) * 136;
+    const y = 140 + Math.sin((angle - 90) * (Math.PI / 180)) * 136;
+
+    numberElement.style.position = 'absolute';
+    numberElement.style.left = `${x}px`;
+    numberElement.style.top = `${y}px`;
+    numberElement.style.transform = `rotate(${angle}deg)`;
+
+    wheel.appendChild(numberElement);
+  });
+}
+
+window.addEventListener('load', addNumbersToWheel);
+
+spinButton.addEventListener('click', spinWheel);
 
 function spinWheel() {
   if (isSpinning) return;
@@ -102,43 +127,3 @@ function spinWheel() {
     isSpinning = false;
   }, 4000);
 }
-
-spinButton.addEventListener('click', spinWheel);
-
-const numbers = [
-36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 24, 23, 22, 21,
-20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
-];
-
-function addNumbersToWheel() {
-  const totalNumbers = numbers.length;
-  const offsetAngle =(360 / totalNumbers); // Ъгъл между всяко число
-  const rotationOffset = offsetAngle / 2; // Завъртане, за да позиционираме 0 между 0 и 36
-
-  numbers.forEach((number, index) => {
-    const numberElement = document.createElement('div');
-    numberElement.classList.add('number');
-    numberElement.setAttribute('data-number', number);
-    numberElement.textContent = number;
-
-    // Завъртаме всеки елемент с допълнителен офсет, за да преместим 0
-    const angle = index * offsetAngle + rotationOffset;
-
-    // Изчисляваме позицията на числото върху кръга
-    const x = 146 + Math.cos((angle - 90) * (Math.PI / 180)) * 136;
-    const y = 150 + Math.sin((angle - 90) * (Math.PI / 180)) * 136;
-
-    numberElement.style.position = 'absolute';
-    numberElement.style.left = `${x}px`;
-    numberElement.style.top = `${y}px`;
-    numberElement.style.transform = `rotate(${angle}deg)`;
-
-    wheel.appendChild(numberElement);
-  });
-}
-
-
-window.addEventListener('load', addNumbersToWheel);
-//    const angle = (360 / 38) * index;
-//const x = 50 + Math.sin((angle * Math.PI) / 180) * 46;
-//const y = 46 - Math.cos((angle * Math.PI) / 180) * 46; 145
