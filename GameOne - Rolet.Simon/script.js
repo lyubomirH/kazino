@@ -134,24 +134,27 @@ function spinWheel() {
     const sectionIndex = Math.floor(winningAngle / (360 / (betType === 'number' ? 37 : (betType === 'range' ? 2 : colors.length))));
     const result = betType === 'number' ? sectionIndex : betType === 'range' ? checkRange(winningAngle) : colors[sectionIndex].color;
 
+
     if (result === bet) {
       resultDisplay.textContent = `Поздравления! Спечелихте със ${betType === 'number' ? 'число' : betType === 'range' ? 'интервал' : 'цвят'} ${result}`;
     } else {
       resultDisplay.textContent = `Загуба. Печеливш ${betType === 'number' ? 'номер' : betType === 'range' ? 'интервал' : 'цвят'}: ${result}`;
-    }
+    }    
 
     isSpinning = false;
   }, 4000);
 }
 
- function checkRange(winningAngle) {
-  const winningNumber = Math.floor(winningAngle / (360 / 37)); // Изчисляваме спечелилото число
+function checkRange(winningAngle) {
+  const winningNumber = Math.floor(winningAngle / (360 / 37));
   if (winningNumber >= 1 && winningNumber <= 18) {
     return "1-18";
   } else if (winningNumber >= 19 && winningNumber <= 36) {
     return "19-36";
   } else if (winningNumber === 0) {
     return "0";
+  } else {
+    return "Невалиден интервал";
   }
-  return null;
 }
+
