@@ -1,0 +1,174 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    color: #d4af37; /* Gold color for text */
+    line-height: 1.6;
+    background-color: #000; /* Black background */
+}
+
+button, a.button {
+    display: inline-block;
+    background-color: #d4af37; /* Gold color for buttons */
+    color: #000; /* Black text on buttons */
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+button:hover, a.button:hover {
+    background-color: #b89f2e; /* Slightly darker gold on hover */
+    color: #fff;
+}
+header .button {
+    margin-top: 0;
+}
+header, footer {
+    background-color: #111; /* Darker black for header and footer */
+    color: #d4af37;
+    padding: 1em;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo h1 {
+    font-size: 1.5em;
+    color: #d4af37; /* Gold color for logo */
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+}
+
+header nav ul li {
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    color: #d4af37;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav ul li a:hover {
+    color: #fff; /* White text on hover */
+}
+
+header .auth-buttons .button {
+    margin-left: 10px;
+}
+
+/* Hero Section */
+.hero {
+    background: url('images/casino-bg.jpg') no-repeat center center/cover;
+    color: #d4af37;
+    text-align: center;
+    padding: 100px 20px;
+    background-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.5); /* Adds a darker overlay to the background image */
+}
+
+.hero h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+/* Games Section */
+.games {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.games .game-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.games .game {
+    width: 200px;
+    margin: 20px;
+}
+
+.games .game img {
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid #d4af37; /* Gold border around game images */
+}
+
+.games .game h3 {
+    color: #d4af37; /* Gold color for game titles */
+}
+
+/* Promotions Section */
+.promotions {
+    background-color: #111; /* Dark background for promotions section */
+    padding: 50px 20px;
+}
+
+.promotions h2 {
+    text-align: center;
+    color: #d4af37; /* Gold color for section title */
+}
+
+.promotions .promotion {
+    background-color: #222; /* Slightly lighter black for promotion cards */
+    color: #d4af37;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #d4af37; /* Gold border around promotion cards */
+}
+
+/* VIP Section */
+.vip {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #111;
+}
+
+.vip h2 {
+    color: #d4af37;
+}
+
+.vip .button {
+    background-color: #d4af37;
+    color: #000;
+    margin-top: 10px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+}
+
+footer .footer-links a {
+    color: #d4af37;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer .footer-links a:hover {
+    color: #fff;
+}
+
+footer p {
+    color: #888;
+    margin-top: 10px;
+}

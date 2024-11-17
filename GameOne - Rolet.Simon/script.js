@@ -6,6 +6,7 @@ const numberBetDiv = document.querySelector('.number-bet');
 const colorBetDiv = document.querySelector('.color-bet');
 const betNumberInput = document.getElementById('bet-number');
 const betColorInput = document.getElementById('bet-color');
+const rangeBetDiv = document.getElementById('range-bet');
 
 let isSpinning = false;
 let currentRotation = 0;
@@ -84,12 +85,17 @@ function addNumbersToWheel() {
 window.addEventListener('load', addNumbersToWheel);
 
 bettingTypeSelect.addEventListener('change', () => {
-  if (bettingTypeSelect.value === 'color') {
+  if (bettingTypeSelect.value === 'number') {
+    numberBetDiv.style.display = 'block';
+    rangeBetDiv.style.display = 'none';  // Скриваме "Интервал"
+  } else if (bettingTypeSelect.value === 'color') {
     colorBetDiv.style.display = 'block';
     numberBetDiv.style.display = 'none';
-  } else {
-    colorBetDiv.style.display = 'none';
-    numberBetDiv.style.display = 'block';
+    rangeBetDiv.style.display = 'none';  // Скриваме "Интервал"
+  } else if (bettingTypeSelect.value === 'range') {
+    rangeBetDiv.style.display = 'block';
+    numberBetDiv.style.display = 'none';
+    colorBetDiv.style.display = 'none';  // Скриваме "Цвят"
   }
 });
 
@@ -125,15 +131,27 @@ function spinWheel() {
 
   setTimeout(() => {
     const winningAngle = currentRotation % 360;
-    const sectionIndex = Math.floor(winningAngle / (360 / (betType === 'number' ? 37 : colors.length)));
-    const result = betType === 'number' ? sectionIndex : colors[sectionIndex].color;
+    const sectionIndex = Math.floor(winningAngle / (360 / (betType === 'number' ? 37 : (betType === 'range' ? 2 : colors.length))));
+    const result = betType === 'number' ? sectionIndex : betType === 'range' ? checkRange(winningAngle) : colors[sectionIndex].color;
 
     if (result === bet) {
-      resultDisplay.textContent = `Поздравления! Спечелихте със ${betType === 'number' ? 'число' : 'цвят'} ${result}`;
+      resultDisplay.textContent = `Поздравления! Спечелихте със ${betType === 'number' ? 'число' : betType === 'range' ? 'интервал' : 'цвят'} ${result}`;
     } else {
-      resultDisplay.textContent = `Загуба. Печеливш ${betType === 'number' ? 'номер' : 'цвят'}: ${result}`;
+      resultDisplay.textContent = `Загуба. Печеливш ${betType === 'number' ? 'номер' : betType === 'range' ? 'интервал' : 'цвят'}: ${result}`;
     }
 
     isSpinning = false;
   }, 4000);
+}
+
+ function checkRange(winningAngle) {
+  const winningNumber = Math.floor(winningAngle / (360 / 37)); // Изчисляваме спечелилото число
+  if (winningNumber >= 1 && winningNumber <= 18) {
+    return "1-18";
+  } else if (winningNumber >= 19 && winningNumber <= 36) {
+    return "19-36";
+  } else if (winningNumber === 0) {
+    return "0";
+  }
+  return null;
 }

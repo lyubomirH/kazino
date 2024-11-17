@@ -14,6 +14,7 @@
       <select id="betting-type">
         <option value="number">Число</option>
         <option value="color">Цвят</option>
+        <option value="range">Интервал (1-18 или 19-36)</option>
       </select>
     </div>
 
@@ -35,6 +36,14 @@
           <option value="red">Червено</option>
           <option value="black">Черно</option>
           <option value="green">Зелено</option>
+        </select>
+      </div>
+
+      <div id="range-bet" style="display: none;">
+        <label for="interval">Изберете интервал:</label>
+        <select id="interval">
+          <option value="1-18">1-18</option>
+          <option value="19-36">19-36</option>
         </select>
       </div>
 
