@@ -101,7 +101,7 @@ bettingTypeSelect.addEventListener('change', () => {
 
 spinButton.addEventListener('click', spinWheel);
 
-function spinWheel() {
+async function spinWheel() {
   if (isSpinning) return;
 
   let bet;
@@ -129,32 +129,34 @@ function spinWheel() {
   wheel.style.transition = 'transform 4s cubic-bezier(0.33, 1, 0.68, 1)';
   wheel.style.transform = `rotate(${currentRotation}deg)`;
 
-  setTimeout(() => {
-    const winningAngle = currentRotation % 360;
-    const sectionIndex = Math.floor(winningAngle / (360 / (betType === 'number' ? 37 : (betType === 'range' ? 2 : colors.length))));
-    const result = betType === 'number' ? sectionIndex : betType === 'range' ? checkRange(winningAngle) : colors[sectionIndex].color;
+  // Изчакваме края на завъртането
+  await new Promise(resolve => setTimeout(resolve, 4000));
 
+  const winningAngle = currentRotation % 360;
+  const sectionIndex = Math.floor(winningAngle / (360 / (betType === 'number' ? 37 : (betType === 'range' ? 2 : colors.length))));
 
-    if (result === bet) {
-      resultDisplay.textContent = `Поздравления! Спечелихте със ${betType === 'number' ? 'число' : betType === 'range' ? 'интервал' : 'цвят'} ${result}`;
-    } else {
-      resultDisplay.textContent = `Загуба. Печеливш ${betType === 'number' ? 'номер' : betType === 'range' ? 'интервал' : 'цвят'}: ${result}`;
-    }    
+  const result = betType === 'number' ? sectionIndex : betType === 'range' ? checkRange(winningAngle) : colors[sectionIndex].color;
 
-    isSpinning = false;
-  }, 4000);
+  if (result === bet) {
+    resultDisplay.textContent = `Поздравления! Спечелихте със ${betType === 'number' ? 'число' : betType === 'range' ? 'интервал' : 'цвят'} ${result}`;
+  } else {
+    resultDisplay.textContent = `Загуба. Печеливш ${betType === 'number' ? 'номер' : betType === 'range' ? 'интервал' : 'цвят'}: ${result}`;
+  }
+
+  isSpinning = false;
 }
 
+
 function checkRange(winningAngle) {
-  const winningNumber = Math.floor(winningAngle / (360 / 37));
+  const winningNumber = Math.floor(winningAngle / (360 / 37)); // Изчисляваме спечелилото число
   if (winningNumber >= 1 && winningNumber <= 18) {
     return "1-18";
   } else if (winningNumber >= 19 && winningNumber <= 36) {
     return "19-36";
   } else if (winningNumber === 0) {
-    return "0";
+    return "0"; // ако е 0
   } else {
-    return "Невалиден интервал";
+    return "Невалиден интервал"; // За всеки друг случай
   }
 }
 
