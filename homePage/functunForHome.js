@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
 
     alert("Welcome to Soft-Bet! Good luck!");
