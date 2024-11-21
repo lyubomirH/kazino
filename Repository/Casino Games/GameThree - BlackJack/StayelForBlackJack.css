@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #2a2a2a;
+    color: #fff;
+}
+
+#casino {
+    margin: 20px auto;
+    padding: 20px;
+    width: 600px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    background-color: #1c1c1c;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.card {
+    width: 50px;
+    height: 75px;
+    margin: 0 5px;
+    border: 1px solid #fff;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    line-height: 75px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:disabled {
+    background-color: #888;
+}
+
+#controls input {
+    width: 80px;
+    padding: 5px;
+    font-size: 16px;
+}
