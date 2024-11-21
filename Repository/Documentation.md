@@ -8,3 +8,5 @@ Dimitur-He made the logo for the webstite and gives pictures corresponding to th
 Kiril and Nikola-They made the Home page and Kiril created a mine game/Game 2
 
 Hristofor-Hristofor did all the organisation,creation and documantation of the files and the line of work 
+
+Kiril and Dimitur made the black jake game together
