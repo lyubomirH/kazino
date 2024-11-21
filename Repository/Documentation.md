@@ -1,2 +1,1 @@
-# Casino
-Here we are posting aur games.
+Here we will post our games and document our work :3
