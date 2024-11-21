@@ -1,0 +1,133 @@
+<h1>Casino Mine Game</h1>
+
+    <!-- Game Balance and Bet Controls -->
+    <div class="status">
+       
+        <p>Place your bet:</p>
+        <input type="number" id="betAmount" min="10" max="1000" value="100">
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <!-- Minefield Grid -->
+    <div class="game-container" id="gameGrid"></div>
+
+    <!-- Game Status and Cashout/Reset Controls -->
+    <div class="controls">
+        <p id="gameMessage"></p>
+        <button class="cashout-btn" id="cashoutButton" style="display: none;" onclick="cashout()">Cashout</button>
+        <button onclick="resetGame()">Reset Game</button>
+    </div>
+
+    <script>
+        const gridSize = 5;
+        const totalMines = 5;
+        let balance = 1000;
+        let bet = 0;
+        let winnings = 0;
+        let mines = [];
+        let gameOver = false;
+        let tilesClicked = 0;
+
+        const balanceEl = document.getElementById('balance');
+        const gameMessageEl = document.getElementById('gameMessage');
+        const gameGridEl = document.getElementById('gameGrid');
+        const cashoutButton = document.getElementById('cashoutButton');
+
+        // Initialize the game grid
+        function startGame() {
+            bet = parseInt(document.getElementById('betAmount').value);
+            if (bet > balance) {
+                alert('You cannot bet more than your current balance.');
+                return;
+            }
+
+            resetGame(); // Reset the game first
+
+            // Deduct the bet from balance
+            balance -= bet;
+            winnings = bet; // Player starts with their bet as the base winnings
+            updateBalance();
+
+            // Generate random mines
+            mines = [];
+            while (mines.length < totalMines) {
+                let mineIndex = Math.floor(Math.random() * gridSize * gridSize);
+                if (!mines.includes(mineIndex)) {
+                    mines.push(mineIndex);
+                }
+            }
+
+            // Populate the grid
+            for (let i = 0; i < gridSize * gridSize; i++) {
+                const tile = document.createElement('div');
+                tile.classList.add('tile');
+                tile.setAttribute('data-index', i);
+                tile.addEventListener('click', () => clickTile(i));
+                gameGridEl.appendChild(tile);
+            }
+
+            gameMessageEl.textContent = 'Game started! Avoid the mines!';
+            cashoutButton.style.display = 'inline-block'; // Show cashout button after game starts
+        }
+
+        // Handle tile click
+        function clickTile(index) {
+            if (gameOver) return;
+
+            const tile = document.querySelector(`[data-index="${index}"]`);
+            if (tile.classList.contains('clicked') || tile.classList.contains('mine')) {
+                return; // Tile already clicked
+            }
+
+            if (mines.includes(index)) {
+                tile.classList.add('mine');
+                gameMessageEl.textContent = 'Boom! You hit a mine!';
+                cashoutButton.style.display = 'none'; // Hide cashout button when game ends
+                gameOver = true;
+                winnings = 0; // Player loses all winnings
+                return;
+            } else {
+                tile.classList.add('clicked');
+                tilesClicked++;
+                winnings += bet * 0.5; // Increase winnings with each successful click
+                updateBalance();
+            }
+
+            // Check if all safe tiles are clicked
+            const allSafeClicked = document.querySelectorAll('.tile.clicked').length === gridSize * gridSize - totalMines;
+            if (allSafeClicked) {
+                gameMessageEl.textContent = 'Congratulations! You avoided all the mines!';
+                gameOver = true;
+                cashoutButton.style.display = 'none'; // Hide cashout button after winning
+            }
+        }
+
+        // Cashout the winnings
+        function cashout() {
+            balance += winnings;
+            updateBalance();
+            gameMessageEl.textContent = `You cashed out with $${winnings.toFixed(2)}!`;
+            cashoutButton.style.display = 'none'; // Hide cashout button after cashout
+            gameOver = true; // End the game after cashout
+        }
+
+        // Update the balance display
+        function updateBalance() {
+            balanceEl.textContent = `$${balance.toFixed(2)}`;
+        }
+
+        // Reset the game
+        function resetGame() {
+            gameGridEl.innerHTML = '';
+            gameMessageEl.textContent = '';
+            cashoutButton.style.display = 'none'; // Hide cashout button on reset
+            gameOver = false;
+            winnings = 0;
+            tilesClicked = 0;
+        }
+
+        // Initialize the game on page load
+        window.onload = resetGame;
+    </script>
+</body>
+</html>
