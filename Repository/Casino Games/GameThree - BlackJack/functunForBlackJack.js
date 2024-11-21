@@ -6,6 +6,7 @@ let playerHand = [];
 let dealerHand = [];
 let balance = 100.0; // Формат с десетични
 let currentBet = 0;
+let placeBetCount = 0;
 
 const balanceElement = document.getElementById('balance');
 const betInput = document.getElementById('bet');
@@ -86,6 +87,17 @@ function placeBet() {
         return;
     }
 
+    placeBetCount++;
+
+    if (placeBetCount > 3) {
+        balance *= 0.75; // Отнемаме 25% от баланса
+        balance = parseFloat(balance.toFixed(2)); // Оставяме само 2 десетични знака
+        message.textContent = 'Penalty: You lose 25% of your balance for repeated rerolls!';
+        placeBetCount = 0; // Рестартираме брояча
+        updateUI();
+        return;
+    }
+
     // Ако всичко е наред, стартирай играта
     message.textContent = '';
     startGame();
@@ -104,6 +116,7 @@ function startGame() {
 function hit() {
     playerHand.push(deck.pop());
     updateUI();
+    placeBetCount = 0;
     if (calculateScore(playerHand) > 21) {
         // Играчът губи само 1/4 от текущия залог при Bust
         balance -= currentBet / 4;
@@ -119,6 +132,7 @@ function stand() {
     updateUI();
     const playerScore = calculateScore(playerHand);
     const dealerScore = calculateScore(dealerHand);
+    placeBetCount = 0;
     if (dealerScore > 21 || playerScore > dealerScore) {
         endGame('You win!');
         balance += currentBet;

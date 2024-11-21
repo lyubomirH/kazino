@@ -2,14 +2,14 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     background-color: #2a2a2a;
-    color: #fff;
+    color: #FFD700;
 }
 
 #casino {
     margin: 20px auto;
     padding: 20px;
     width: 600px;
-    border: 2px solid #fff;
+    border: 2px solid #FFD700;
     border-radius: 10px;
     background-color: #1c1c1c;
 }
@@ -24,8 +24,8 @@ body {
     width: 50px;
     height: 75px;
     margin: 0 5px;
-    border: 1px solid #fff;
-    background-color: #fff;
+    border: 1px solid #1c1c1c;
+    background-color: #FFD700;
     color: #000;
     text-align: center;
     line-height: 75px;
@@ -40,13 +40,13 @@ button {
     border: none;
     border-radius: 5px;
     background-color: #4caf50;
-    color: #fff;
+    color: #1c1c1c;
     cursor: pointer;
     font-size: 16px;
 }
 
 button:disabled {
-    background-color: #888;
+    background-color: #FFD700;
 }
 
 #controls input {
