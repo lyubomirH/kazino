@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slot Machine</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #282c34;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+    .slot-machine {
+      margin: 50px auto;
+      max-width: 400px;
+      border: 5px solid #fff;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #444;
+    }
+    .reels {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .reel {
+      width: 80px;
+      height: 80px;
+      border: 2px solid #fff;
+      margin: 0 10px;
+      border-radius: 10px;
+      background: #000;
+      font-size: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: gold;
+    }
+    .button-container {
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: gold;
+      color: black;
+      cursor: pointer;
+    }
+    button:disabled {
+      background-color: grey;
+      cursor: not-allowed;
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="slot-machine">
+    <h1>Slot Machine</h1>
+    <div class="reels">
+      <div class="reel" id="reel1">🍒</div>
+      <div class="reel" id="reel2">🍋</div>
+      <div class="reel" id="reel3">🍊</div>
+    </div>
+    <div class="button-container">
+      <button id="spinButton">Spin</button>
+    </div>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    const symbols = ["🍒", "🍋", "🍊", "🍇", "🍉", "⭐", "🔔"];
+    const reel1 = document.getElementById("reel1");
+    const reel2 = document.getElementById("reel2");
+    const reel3 = document.getElementById("reel3");
+    const message = document.getElementById("message");
+    const spinButton = document.getElementById("spinButton");
+
+    function getRandomSymbol() {
+      return symbols[Math.floor(Math.random() * symbols.length)];
+    }
+
+    function spinReels() {
+      message.textContent = "";
+      spinButton.disabled = true;
+      const interval1 = setInterval(() => reel1.textContent = getRandomSymbol(), 50);
+      const interval2 = setInterval(() => reel2.textContent = getRandomSymbol(), 50);
+      const interval3 = setInterval(() => reel3.textContent = getRandomSymbol(), 50);
+
+      setTimeout(() => {
+        clearInterval(interval1);
+        reel1.textContent = getRandomSymbol();
+      }, 1000);
+      setTimeout(() => {
+        clearInterval(interval2);
+        reel2.textContent = getRandomSymbol();
+      }, 1500);
+      setTimeout(() => {
+        clearInterval(interval3);
+        reel3.textContent = getRandomSymbol();
+        checkWin();
+        spinButton.disabled = false;
+      }, 2000);
+    }
+
+    function checkWin() {
+      if (reel1.textContent === reel2.textContent && reel2.textContent === reel3.textContent) {
+        message.textContent = "🎉 Jackpot! You win! 🎉";
+      } else {
+        message.textContent = "Try again!";
+      }
+    }
+
+    spinButton.addEventListener("click", spinReels);
+  </script>
+</body>
+</html>
