@@ -1,0 +1,87 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #2c2c2c; /* Тъмен сив фон */
+    color: #f3f3f3; /* Светъл текст */
+  }
+  
+  .poker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .header {
+    background-color: #444444; /* По-светло сиво */
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    color: #ffdd00; /* Жълт текст */
+  }
+  
+  .game-area {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .player-hand {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .controls {
+    margin-top: 20px;
+  }
+  
+  .btn {
+    background-color: #ffdd00; /* Жълти бутони */
+    color: #2c2c2c; /* Сив текст */
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .btn:hover {
+    background-color: #e6c800; /* По-тъмно жълто */
+  }
+  
+  .status {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  .balance-info {
+    margin: 20px 0;
+    color: #ffdd00;
+    font-size: 20px;
+    text-align: center;
+  }
+    
+  .opponent-hand {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .opponent-hand .card {
+    background-color: #444;
+    color: #ffdd00;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ffdd00;
+    border-radius: 5px;
+    font-size: 18px;
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+  }
+  

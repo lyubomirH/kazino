@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poker Game</title>
+  <link rel="stylesheet" href="styleForPoker.css">
+</head>
+<body>
+    <div class="opponent-hand" id="opponent-hand"></div>
+
+    <div class="balance-info">
+        <p id="player-balance">Balance: $1000</p>
+        <p id="current-bet">Current Bet: $0</p>
+    </div>  
+  <div class="poker-container">
+    <header class="header">
+      <h1>Online Poker</h1>
+    </header>
+    <main class="game-area">
+      <div class="player-hand" id="player-hand"></div>
+      <div class="controls">
+        <button id="deal-btn" class="btn">Deal</button>
+        <button id="bet-btn" class="btn">Bet</button>
+        <button id="fold-btn" class="btn">Fold</button>
+      </div>
+      <div class="status">
+        <p id="game-status">Welcome to Poker!</p>
+      </div>
+    </main>
+  </div>
+  <script src="scriptForPoker.js"></script>
+</body>
+</html>
